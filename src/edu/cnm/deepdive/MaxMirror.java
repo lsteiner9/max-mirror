@@ -1,6 +1,8 @@
+package edu.cnm.deepdive;
+
 public class MaxMirror {
 
-  public int maxMirror(int[] nums) {
+  public static int maxMirror(int[] nums) {
     int count = nums.length;
     if (nums.length == 0) {
     } else if (nums[0] != nums [nums.length - 1]) {
@@ -9,7 +11,7 @@ public class MaxMirror {
     return count;
   }
 
-  private int recurseMirror(int[] nums, int start, int stop) {
+  private static int recurseMirror(int[] nums, int start, int stop) {
     if (start >= stop) {
       return 1;
     } else if (!isMirror(nums, start, stop)) {
@@ -19,7 +21,7 @@ public class MaxMirror {
     }
   }
 
-  private boolean isMirror(int[]nums, int start, int stop) {
+  private static boolean isMirror(int[]nums, int start, int stop) {
     for (int i = 0, j = stop + 1 - start; j >= 0; i++, j--) {
       if (nums[i] != nums[j]) {
         return false;
