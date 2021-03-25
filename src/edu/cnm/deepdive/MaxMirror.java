@@ -11,7 +11,7 @@ public class MaxMirror {
     return count;
   }
 
-  private static int recurseMirror(int[] nums, int start, int stop) {
+  public static int recurseMirror(int[] nums, int start, int stop) {
     if (start >= stop) {
       return 1;
     } else if (!isMirror(nums, start, stop)) {
@@ -21,8 +21,20 @@ public class MaxMirror {
     }
   }
 
-  private static boolean isMirror(int[]nums, int start, int stop) {
-    for (int i = 0, j = stop + 1 - start; j >= 0; i++, j--) {
+  public static boolean isMirror(int[] nums, int start, int stop) {
+    for (int i = 0, j = stop - start; j >= 0; i++, j--) {
+      if (nums[i] != nums[j]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static boolean areMirrors(int[] nums, int start1, int stop1, int start2, int stop2) {
+    if (stop1 - start1 != stop2 - start2) {
+      return false;
+    }
+    for (int i = start1, j = stop2; i <= stop1; i++, j--) {
       if (nums[i] != nums[j]) {
         return false;
       }
