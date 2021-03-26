@@ -1,24 +1,21 @@
 package edu.cnm.deepdive;
 
+import java.util.Arrays;
+
 public class MaxMirror {
 
   public static int maxMirror(int[] nums) {
-    int count = nums.length;
-    if (nums.length == 0) {
-    } else if (nums[0] != nums [nums.length - 1]) {
-      count = Math.max(recurseMirror(nums, 0, nums.length - 2), recurseMirror(nums, 1, nums.length - 1));
+    int count = 0;
+    String numbers = Arrays.toString(nums).replace("[", "").replace("]", "").replace(",", "").replace(" ", "");
+    for (int i = numbers.length() - 1; i > 0; i--) {
+      for (int j = i - 1; j >= 0; j--) {
+        String temp = new StringBuilder(numbers.substring(j, i + 1)).reverse().toString();
+        if (numbers.contains(temp)) {
+          count = Math.max(count, i + 1 - j);
+        }
+      }
     }
-    return count;
-  }
-
-  public static int recurseMirror(int[] nums, int start, int stop) {
-    if (start >= stop) {
-      return 1;
-    } else if (!isMirror(nums, start, stop)) {
-      return Math.max(recurseMirror(nums, start + 1, stop), recurseMirror(nums, start, stop - 1));
-    } else {
-      return nums.length;
-    }
+    return nums.length == 1 ? 1 : count;
   }
 
   public static boolean isMirror(int[] nums, int start, int stop) {
