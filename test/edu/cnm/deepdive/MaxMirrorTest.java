@@ -41,15 +41,4 @@ class MaxMirrorTest {
     assertEquals(expected, MaxMirror.maxMirror(input));
   }
 
-  @ParameterizedTest
-  @MethodSource
-  void isMirror(int[] nums, int start, int stop, boolean expected) {
-    assertEquals(expected, MaxMirror.isMirror(nums, start, stop));
-  }
-
-  @ParameterizedTest
-  @MethodSource
-  void areMirrors(int[] nums, int start1, int stop1, int start2, int stop2, boolean expected) {
-    assertEquals(expected, MaxMirror.areMirrors(nums, start1, stop1, start2, stop2));
-  }
 }

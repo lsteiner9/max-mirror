@@ -1,41 +1,36 @@
 package edu.cnm.deepdive;
 
-import java.util.Arrays;
-
 public class MaxMirror {
 
   public static int maxMirror(int[] nums) {
     int count = 0;
-    String numbers = Arrays.toString(nums).replace("[", "").replace("]", "").replace(",", "").replace(" ", "");
-    for (int i = numbers.length() - 1; i > 0; i--) {
+    for (int i = nums.length - 1; i > 0; i--) {
       for (int j = i - 1; j >= 0; j--) {
-        String temp = new StringBuilder(numbers.substring(j, i + 1)).reverse().toString();
-        if (numbers.contains(temp)) {
-          count = Math.max(count, i + 1 - j);
+        int[] temp = reverse(nums, j, i + 1);
+        int index = 0;
+        for (int num : nums) {
+          if (index >= temp.length) {
+            break;
+          }
+          if (temp[index] == num) {
+            index++;
+            count = Math.max(index, count);
+          } else {
+            index = 0;
+          }
         }
       }
     }
     return nums.length == 1 ? 1 : count;
   }
 
-  public static boolean isMirror(int[] nums, int start, int stop) {
-    for (int i = 0, j = stop - start; j >= 0; i++, j--) {
-      if (nums[i] != nums[j]) {
-        return false;
-      }
+  private static int[] reverse(int[] nums, int start, int stop) {
+    int[] reversed = new int[stop - start];
+    int count = 0;
+    for (int i = stop - 1; i >= start; i--) {
+      reversed[count++] = nums[i];
     }
-    return true;
+    return reversed;
   }
 
-  public static boolean areMirrors(int[] nums, int start1, int stop1, int start2, int stop2) {
-    if (stop1 - start1 != stop2 - start2) {
-      return false;
-    }
-    for (int i = start1, j = stop2; i <= stop1; i++, j--) {
-      if (nums[i] != nums[j]) {
-        return false;
-      }
-    }
-    return true;
-  }
 }
